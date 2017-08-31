@@ -29,7 +29,11 @@ const cart =
 const itemRepeater =
   itemName =>
     count => {
-      // TODO
+      let result = []
+      for (let x=0; x < count; x++){
+        result.push(itemName)
+      }
+      return result
     }
 
 /**
@@ -39,7 +43,19 @@ const itemRepeater =
 const constructCarts =
   listings =>
     customers => {
-      // TODO
+      let resultArray = []
+      for (let x=0; x < customers.length; x++){
+        let listOb = customers[x].shoppingList
+        let itemList = []
+        for (let itemName in listOb) {
+          itemList = itemList.concat(itemRepeater(itemName)(listOb[itemName]))
+        }
+        resultArray.push({
+          customer: customers[x].name,
+          items: itemList
+        })
+      }
+      return resultArray
     }
 
 module.exports = {
